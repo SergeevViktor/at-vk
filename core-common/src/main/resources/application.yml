@@ -1,2 +1,4 @@
 context:
   baseUrl: https://fakestoreapi.com
+  baseUiUrl: https://www.bing.com
+  webDriverType: EDGE

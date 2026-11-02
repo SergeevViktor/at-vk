@@ -1,8 +1,8 @@
 package ru.sergeev.hw47.acts;
 
 import org.springframework.stereotype.Component;
-import ru.sergeev.coreui.BaseActs;
+import ru.sergeev.coreui.acts.BaseActs;
 
 @Component
-public class TestActs extends BaseActs {
+public class SauceDemoActs extends BaseActs {
 }

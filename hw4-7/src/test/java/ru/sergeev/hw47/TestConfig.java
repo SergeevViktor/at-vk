@@ -1,28 +1,84 @@
 package ru.sergeev.hw47;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.openqa.selenium.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
-import ru.sergeev.hw47.acts.TestActs;
+import ru.sergeev.coreui.pages.SauceDemoLoginPage;
+import ru.sergeev.hw47.acts.SauceDemoActs;
+import ru.sergeev.hw47.pages.ProductsPage;
 import ru.sergeev.hw47.pages.TestPage;
 
+import java.util.List;
+
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
+import static ru.sergeev.coreui.acts.BaseActs.checkResult;
+import static ru.sergeev.coreui.enums.SauceDemoAccountEnum.PASSWORD;
+import static ru.sergeev.coreui.enums.SauceDemoAccountEnum.STANDARD_USER;
+import static ru.sergeev.hw47.enums.SauceDemoEndpoints.INVENTORY;
+
 @Owner("sergeev.v.a")
-//TODO: подумать какой сервис тестировать -> заполнить поля
-@Epic("")
-@Feature("")
+@Epic("UI")
+@Feature("SauceDemo")
 public class TestConfig extends HwAbstractUiTest {
     @Autowired
-    private TestActs testActs;
+    private SauceDemoActs sauceDemoActs;
 
-    //TODO: 3-5 простых теста
-    @Story("")
-    @DisplayName("")
+    @Story("0")
+    @DisplayName("Тест")
     @Test
     public void test() {
-        testActs.open(BASE_UI_URL, TestPage.class);
+        sauceDemoActs.open(BASE_UI_URL, TestPage.class);
+    }
+
+    @Story("1")
+    @DisplayName("Авторизация")
+    @Test
+    public void successAuthorization() {
+        sauceDemoActs.open(BASE_UI_URL, SauceDemoLoginPage.class)
+                .validatePage()
+                .login(STANDARD_USER.getVal(), PASSWORD.getVal(), ProductsPage.class)
+                .validatePage();
+    }
+
+    @Story("2")
+    @DisplayName("Авторизация")
+    @ParameterizedTest(name = ": негативный")
+    @MethodSource("ru.sergeev.hw47.helper.DataProvider#providerAuthorizationNegative")
+    public void authorizationNegative(String password, String expectedErrorMessage) {
+        String errorMessage = sauceDemoActs
+                .open(BASE_UI_URL, SauceDemoLoginPage.class)
+                .validatePage()
+                .login(STANDARD_USER.getVal(), password, SauceDemoLoginPage.class)
+                .getLoginErrorMessage();
+
+        Allure.step("Проверка, что сообщение в ошибке соответствует ожидаемой", () -> {
+            checkResult(expectedErrorMessage, errorMessage);
+        });
+    }
+
+    @Story("3")
+    @DisplayName("Валидация бокового меню")
+    @ParameterizedTest(name = ": ")
+    @MethodSource("ru.sergeev.hw47.helper.DataProvider#providerValidateSidebarMenu")
+    public void validateSidebarMenu(List<String> expectedSidebarElements) {
+        getWebDriver().manage().addCookie(new Cookie("session-username", "standard_user"));
+
+        List<String> elements = sauceDemoActs
+                .open(BASE_UI_URL + INVENTORY.getVal(), ProductsPage.class)
+                .validatePage()
+                .openSidebarMenu()
+                .getTextElementsOfSidebarMenu();
+
+        Allure.step("Проверка, что наименования эелементов бокового меню соответсвуют ожидаемым", () -> {
+            checkResult(expectedSidebarElements, elements);
+        });
     }
 }

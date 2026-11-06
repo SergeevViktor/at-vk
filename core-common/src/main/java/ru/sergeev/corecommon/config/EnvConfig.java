@@ -8,6 +8,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Setter
 @ConfigurationProperties(prefix = "context")
 public class EnvConfig {
-
     private String baseUrl;
+    private String baseUiUrl;
+    private WebDriverType webDriverType;
+
+    public enum WebDriverType {
+        CHROME,
+        EDGE
+    }
 }

@@ -21,7 +21,7 @@ public abstract class BasePage {
     }
 
     @Step("Добавляем cookie: {cookie}")
-    public void addCookie(Cookie cookie) {
+    public void addCookie(@Param(mode = HIDDEN) Cookie cookie) {
         getWebDriver().manage().addCookie(cookie);
     }
 }

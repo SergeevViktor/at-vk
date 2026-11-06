@@ -73,7 +73,7 @@ public class TestConfig extends HwAbstractUiTest {
                 .openSidebarMenu()
                 .getTextElementsOfSidebarMenu();
 
-        Allure.step("Проверка, что наименования эелементов бокового меню соответсвуют ожидаемым", () -> {
+        Allure.step("Проверка, что наименования элементов бокового меню соответсвуют ожидаемым", () -> {
             checkResult(expectedSidebarElements, elements);
         });
     }

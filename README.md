@@ -42,3 +42,16 @@ mvn allure:serve
 ```
 
 # Homework №4
+
+```bash
+# Скнировать проект
+
+# Собрать проект
+mvn clean install -Dmaven.test.skip=true
+
+# Запустить тесты
+mvn test -pl hw4-7 -Dtest=TestConfig
+
+# Запустить сервер allure с результами тестов
+mvn allure:serve
+```

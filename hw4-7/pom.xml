@@ -9,9 +9,9 @@
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>hw-4-7</artifactId>
+    <artifactId>hw4-7</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hw-4-7</name>
+    <name>hw4-7</name>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

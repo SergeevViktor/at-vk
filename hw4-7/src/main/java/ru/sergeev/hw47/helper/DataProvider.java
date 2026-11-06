@@ -1,6 +1,7 @@
 package ru.sergeev.hw47.helper;
 
 import org.junit.jupiter.params.provider.Arguments;
+import org.openqa.selenium.Cookie;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -18,6 +19,7 @@ public class DataProvider {
     public static Stream<Arguments> providerValidateSidebarMenu() {
 
         return Stream.of(Arguments.of(
+                new Cookie("session-username", "standard_user"),
                 List.of("All Items", "Dynamic Catalog", "About", "Logout", "Reset App State")
         ));
     }

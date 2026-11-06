@@ -22,7 +22,7 @@ public class SauceDemoLoginPage extends BasePage {
 
     @Step("Проверка открытия страницы 'Swag Labs'")
     public SauceDemoLoginPage validatePage() {
-        validatePageByText("Products", LOGIN_LOGO.getVal());
+        validatePageByText("Swag Labs", LOGIN_LOGO.getVal());
 
         return this;
     }

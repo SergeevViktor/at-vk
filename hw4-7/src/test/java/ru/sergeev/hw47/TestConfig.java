@@ -1,10 +1,6 @@
 package ru.sergeev.hw47;
 
-import io.qameta.allure.Allure;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,7 +14,6 @@ import ru.sergeev.hw47.pages.TestPage;
 
 import java.util.List;
 
-import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 import static ru.sergeev.coreui.acts.BaseActs.checkResult;
 import static ru.sergeev.coreui.enums.SauceDemoAccountEnum.PASSWORD;
 import static ru.sergeev.coreui.enums.SauceDemoAccountEnum.STANDARD_USER;
@@ -68,8 +63,9 @@ public class TestConfig extends HwAbstractUiTest {
     @DisplayName("Валидация бокового меню")
     @ParameterizedTest(name = ": ")
     @MethodSource("ru.sergeev.hw47.helper.DataProvider#providerValidateSidebarMenu")
-    public void validateSidebarMenu(List<String> expectedSidebarElements) {
-        getWebDriver().manage().addCookie(new Cookie("session-username", "standard_user"));
+    public void validateSidebarMenu(Cookie cookie, List<String> expectedSidebarElements) {
+        sauceDemoActs.open(BASE_UI_URL, SauceDemoLoginPage.class)
+                .addCookie(cookie);
 
         List<String> elements = sauceDemoActs
                 .open(BASE_UI_URL + INVENTORY.getVal(), ProductsPage.class)

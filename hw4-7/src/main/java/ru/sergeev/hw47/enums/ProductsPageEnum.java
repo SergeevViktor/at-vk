@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ProductsPageEnum {
-    TITLE("//span[@class='title]"),
+    TITLE("//span[@class='title']"),
     SIDEBAR_BUTTON("react-burger-menu-btn"),
     SIDEBAR_ELEMENTS("//*[@class='bm-item-list']/a");
 

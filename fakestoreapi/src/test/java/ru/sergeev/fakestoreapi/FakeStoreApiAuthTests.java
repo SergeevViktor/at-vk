@@ -6,6 +6,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class FakeStoreApiAuthTests extends FakeStoreApiAbstractRestTest {
 
     @Story("1")
     @DisplayName("Аутентификация пользователя")
+    @Tag("authentication")
     @Link("https://fakestoreapi.com/docs#tag/Auth/operation/loginUser")
     @ParameterizedTest(name = ": /auth/login")
     @MethodSource("ru.sergeev.fakestoreapi.helper.AuthDataProvider#providerPostLoginUser")
@@ -40,6 +42,7 @@ public class FakeStoreApiAuthTests extends FakeStoreApiAbstractRestTest {
 
     @Story("1")
     @DisplayName("Аутентификация пользователя - негативный")
+    @Tag("authentication")
     @Link("https://fakestoreapi.com/docs#tag/Auth/operation/loginUser")
     @ParameterizedTest(name = ": /auth/login")
     @MethodSource("ru.sergeev.fakestoreapi.helper.AuthDataProvider#providerPostLoginUserNegative")

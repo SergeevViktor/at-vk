@@ -5,6 +5,7 @@ import io.qameta.allure.Link;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import ru.sergeev.corecommon.config.EnvConfig;
@@ -20,6 +21,7 @@ import static ru.sergeev.corerest.specification.Specification.specDelete;
 @ContextConfiguration(classes = {
         FakeStoreApiConfiguration.class
 })
+@Tag("api")
 public abstract class FakeStoreApiAbstractRestTest extends AbstractRestTest {
     @Autowired
     private EnvConfig env;

@@ -55,3 +55,22 @@ mvn test -pl hw4-7 -Dtest=TestConfig
 # Запустить сервер allure с результами тестов
 mvn allure:serve
 ```
+
+# Homework №5
+
+```bash
+# Скнировать проект
+
+# Собрать проект
+mvn clean install -Dmaven.test.skip=true
+
+# Запустить тесты
+mvn test -pl hw4-7 -Dtest=SauceDemoTests
+#Запуск по тегам, например
+mvn test -Dgroups=ui
+mvn test -Dgroups=api
+mvn test -Dgroups=sidebar
+
+# Запустить сервер allure с результами тестов
+mvn allure:serve
+```

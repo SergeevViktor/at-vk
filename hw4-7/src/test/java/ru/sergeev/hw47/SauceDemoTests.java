@@ -1,8 +1,7 @@
 package ru.sergeev.hw47;
 
 import io.qameta.allure.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.Cookie;
@@ -22,10 +21,11 @@ import static ru.sergeev.hw47.enums.SauceDemoEndpoints.INVENTORY;
 @Owner("sergeev.v.a")
 @Epic("UI")
 @Feature("SauceDemo")
-public class TestConfig extends HwAbstractUiTest {
+public class SauceDemoTests extends HwAbstractUiTest {
     @Autowired
     private SauceDemoActs sauceDemoActs;
 
+    @Disabled
     @Story("0")
     @DisplayName("Тест")
     @Test
@@ -35,6 +35,7 @@ public class TestConfig extends HwAbstractUiTest {
 
     @Story("1")
     @DisplayName("Авторизация")
+    @Tag("authorization")
     @Test
     public void successAuthorization() {
         sauceDemoActs.open(BASE_UI_URL, SauceDemoLoginPage.class)
@@ -45,6 +46,7 @@ public class TestConfig extends HwAbstractUiTest {
 
     @Story("2")
     @DisplayName("Авторизация")
+    @Tag("authorization")
     @ParameterizedTest(name = ": негативный")
     @MethodSource("ru.sergeev.hw47.helper.DataProvider#providerAuthorizationNegative")
     public void authorizationNegative(String password, String expectedErrorMessage) {
@@ -61,6 +63,8 @@ public class TestConfig extends HwAbstractUiTest {
 
     @Story("3")
     @DisplayName("Валидация бокового меню")
+    @Tag("sidebar")
+    @Timeout(5)
     @ParameterizedTest(name = ": ")
     @MethodSource("ru.sergeev.hw47.helper.DataProvider#providerValidateSidebarMenu")
     public void validateSidebarMenu(Cookie cookie, List<String> expectedSidebarElements) {

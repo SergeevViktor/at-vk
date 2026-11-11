@@ -6,6 +6,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class FakeStoreApiUserTests extends FakeStoreApiAbstractRestTest {
 
     @Story("1")
     @DisplayName("Получение списка пользователей")
+    @Tag("user")
     @Link("https://fakestoreapi.com/docs#tag/Users/operation/getAllUsers")
     @ParameterizedTest(name = ": /users")
     @MethodSource("ru.sergeev.fakestoreapi.helper.UserDataProvider#providerGetAllUsers")
@@ -40,6 +42,7 @@ public class FakeStoreApiUserTests extends FakeStoreApiAbstractRestTest {
 
     @Story("2")
     @DisplayName("Создание нового пользователя")
+    @Tag("user")
     @Link("https://fakestoreapi.com/docs#tag/Users/operation/addUser")
     @ParameterizedTest(name = ": /users")
     @MethodSource("ru.sergeev.fakestoreapi.helper.UserDataProvider#providerPostAddUser")
@@ -52,6 +55,7 @@ public class FakeStoreApiUserTests extends FakeStoreApiAbstractRestTest {
 
     @Story("3")
     @DisplayName("Обновление пользователя")
+    @Tag("user")
     @Link("https://fakestoreapi.com/docs#tag/Users/operation/updateUser")
     @ParameterizedTest(name = ": /users/{2}")
     @MethodSource("ru.sergeev.fakestoreapi.helper.UserDataProvider#providerPutUpdateUserById")
@@ -64,6 +68,7 @@ public class FakeStoreApiUserTests extends FakeStoreApiAbstractRestTest {
 
     @Story("4")
     @DisplayName("Удаление пользователя")
+    @Tag("user")
     @Link("https://fakestoreapi.com/docs#tag/Users/operation/deleteUser")
     @ParameterizedTest(name = ": /users/{1}")
     @MethodSource("ru.sergeev.fakestoreapi.helper.UserDataProvider#providerDeleteUserById")

@@ -3,6 +3,7 @@ package ru.sergeev.hw47;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import ru.sergeev.corecommon.config.EnvConfig;
@@ -17,6 +18,7 @@ import static ru.sergeev.coreui.enums.BrowserSizeEnum.PC;
 @ContextConfiguration(classes = {
         HwUiConfiguration.class
 })
+@Tag("ui")
 public abstract class HwAbstractUiTest extends AbstractUiTest {
     @Autowired
     protected EnvConfig envConfig;

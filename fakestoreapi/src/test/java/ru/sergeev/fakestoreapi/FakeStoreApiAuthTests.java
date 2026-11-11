@@ -15,8 +15,8 @@ import ru.sergeev.fakestoreapi.service.FakeStoreApiRestService;
 
 import java.util.Map;
 
-import static ru.sergeev.fakestoreapi.specification.Specification.specInstall;
-import static ru.sergeev.fakestoreapi.specification.Specification.specRequest;
+import static ru.sergeev.corerest.specification.Specification.specInstall;
+import static ru.sergeev.corerest.specification.Specification.specRequest;
 
 @Owner("sergeev.v.a")
 @Feature("auth-controller")

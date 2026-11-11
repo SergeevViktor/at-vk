@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static ru.sergeev.corerest.specification.Specification.getRequestSpec;
 
 /**
  * Класс с основными методами для отправки запроса
@@ -16,6 +17,7 @@ public class Rest {
 
     public Response get(String url, Map<String, String> headers) {
         return given()
+                .spec(getRequestSpec())
                 .filter(new AllureRestAssured())
                 .headers(headers)
                 .when()
@@ -24,6 +26,7 @@ public class Rest {
 
     public Response post(String url, Map<String, String> headers, Object body) {
         return given()
+                .spec(getRequestSpec())
                 .filter(new AllureRestAssured())
                 .headers(headers)
                 .body(body)
@@ -35,6 +38,7 @@ public class Rest {
         String param = getParam(url);
 
         return given()
+                .spec(getRequestSpec())
                 .filter(new AllureRestAssured())
                 .headers(headers)
                 .pathParam(param, paramValue)
@@ -47,6 +51,7 @@ public class Rest {
         String param = getParam(url);
 
         return given()
+                .spec(getRequestSpec())
                 .filter(new AllureRestAssured())
                 .headers(headers)
                 .pathParam(param, paramValue)

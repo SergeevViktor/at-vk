@@ -39,7 +39,6 @@ public class FakeStoreApiRestService {
         return rest.deleteWithParam(USERS.getVal() + ID.getVal(), headers, paramValue);
     }
 
-
     //auth-controller
 
     @Step("Отправляем POST запрос в fakestoreapi - /auth/login")

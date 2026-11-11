@@ -10,7 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import ru.sergeev.corecommon.config.EnvConfig;
 import ru.sergeev.corerest.AbstractRestTest;
 
-import static ru.sergeev.fakestoreapi.specification.Specification.specDelete;
+import static ru.sergeev.corerest.specification.Specification.specDelete;
 
 @Getter
 @Epic("API > FakeStoreAPi")

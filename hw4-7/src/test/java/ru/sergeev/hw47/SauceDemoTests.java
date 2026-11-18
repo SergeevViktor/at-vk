@@ -10,6 +10,7 @@ import ru.sergeev.coreui.pages.SauceDemoLoginPage;
 import ru.sergeev.hw47.acts.SauceDemoActs;
 import ru.sergeev.hw47.pages.ProductsPage;
 import ru.sergeev.hw47.pages.TestPage;
+import ru.sergeev.coreui.valueObjects.Credentials;
 
 import java.util.List;
 
@@ -56,9 +57,8 @@ public class SauceDemoTests extends HwAbstractUiTest {
                 .login(STANDARD_USER.getVal(), password, SauceDemoLoginPage.class)
                 .getLoginErrorMessage();
 
-        Allure.step("Проверка, что сообщение в ошибке соответствует ожидаемой", () -> {
-            checkResult(expectedErrorMessage, errorMessage);
-        });
+        Allure.step("Проверка, что сообщение в ошибке соответствует ожидаемой", () ->
+            checkResult(expectedErrorMessage, errorMessage));
     }
 
     @Story("3")
@@ -77,8 +77,19 @@ public class SauceDemoTests extends HwAbstractUiTest {
                 .openSidebarMenu()
                 .getTextElementsOfSidebarMenu();
 
-        Allure.step("Проверка, что наименования элементов бокового меню соответсвуют ожидаемым", () -> {
-            checkResult(expectedSidebarElements, elements);
-        });
+        Allure.step("Проверка, что наименования элементов бокового меню соответсвуют ожидаемым", () ->
+                checkResult(expectedSidebarElements, elements));
+    }
+
+    @Story("4")
+    @DisplayName("Авторизация, используя паттерн ValueObject")
+    @Tag("authorization")
+    @ParameterizedTest(name = ": ")
+    @MethodSource("ru.sergeev.hw47.helper.DataProvider#providerAuthorizationByValueObject")
+    public void successAuthorizationByValueObject(Credentials data) {
+        sauceDemoActs.open(BASE_UI_URL, SauceDemoLoginPage.class)
+                .validatePage()
+                .login(data, ProductsPage.class)
+                .validatePage();
     }
 }

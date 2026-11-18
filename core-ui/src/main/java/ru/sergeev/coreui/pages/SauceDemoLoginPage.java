@@ -1,11 +1,11 @@
 package ru.sergeev.coreui.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import io.qameta.allure.Allure;
 import io.qameta.allure.Param;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import ru.sergeev.coreui.enums.SauceDemoLoginPageEnum;
+import ru.sergeev.coreui.valueObjects.Credentials;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -30,13 +30,16 @@ public class SauceDemoLoginPage extends BasePage {
     @Step("Авторизация")
     public <T extends BasePage> T login(String user, String password,
                                         @Param(mode = HIDDEN) Class<T> nextPage) {
-        Allure.step("Вводим логин: " + user + " и пароль: " + password, () -> {
-            USER_FLD.setValue(user);
-            PASSWORD_FLD.setValue(password);
-        });
-        Allure.step("Нажимаем на кнопку 'Login", () -> {
-            LOGIN_BTN.shouldBe(visible).click();
-        });
+        setValueInAuthorizationFields(user, password);
+        pushToLoginBtn();
+
+        return nextPage.cast(page(nextPage));
+    }
+
+    @Step("Авторизация")
+    public <T extends BasePage> T login(Credentials data, @Param(mode = HIDDEN) Class<T> nextPage) {
+        setValueInAuthorizationFields(data.username(), data.password());
+        pushToLoginBtn();
 
         return nextPage.cast(page(nextPage));
     }
@@ -44,5 +47,17 @@ public class SauceDemoLoginPage extends BasePage {
     @Step("Сохраняем текст ошибки авторизации")
     public String getLoginErrorMessage() {
         return ERROR_MSG.shouldBe(visible).getText();
+    }
+
+
+    @Step("Вводим логин: '{user}' и пароль: '{password}'")
+    private void setValueInAuthorizationFields(String user, String password) {
+        USER_FLD.setValue(user);
+        PASSWORD_FLD.setValue(password);
+    }
+
+    @Step("Нажимаем на кнопку 'Login'")
+    private void pushToLoginBtn() {
+        LOGIN_BTN.shouldBe(visible).click();
     }
 }

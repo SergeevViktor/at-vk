@@ -21,4 +21,11 @@ public class BaseActs {
                 "Фактический результат не совпадает с ожидаемым. " +
                         result + "|" + expected);
     }
+
+    @Step("Проверка результата: объекты не должны быть равны")
+    public static void checkDifference(Object result, Object expected) {
+        Assertions.assertNotEquals(expected, result,
+                "Фактический результат совпадает с ожидаемым. " +
+                        result + "|" + expected);
+    }
 }
